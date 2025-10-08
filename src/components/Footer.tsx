@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              LavaSystem
+              ClickLava
             </h3>
             <p className="text-muted-foreground mb-4">
               O sistema mais completo para gestão de lava-rápidos.
@@ -66,7 +66,7 @@ const Footer = () => {
 
         <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2025 LavaSystem. Todos os direitos reservados.
+            © 2025 ClickLava. Todos os direitos reservados.
           </p>
           <div className="flex gap-6 text-sm text-muted-foreground">
             <a href="#" className="hover:text-primary transition-colors">Termos de uso</a>
