@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Bell, BarChart3, Users, Calendar, FileText, Shield } from "lucide-react";
+import { Bell, BarChart3, Users, FileText, Shield } from "lucide-react";
 
 const features = [
   {
@@ -16,11 +16,6 @@ const features = [
     icon: BarChart3,
     title: "Relatórios e Análises",
     description: "Dashboards completos com métricas de performance, faturamento e produtividade.",
-  },
-  {
-    icon: Calendar,
-    title: "Agendamento Online",
-    description: "Sistema de agendamento integrado para otimizar o fluxo de atendimento.",
   },
   {
     icon: FileText,
