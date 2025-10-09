@@ -42,49 +42,71 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="py-24 px-4 bg-[var(--gradient-subtle)]">
-      <div className="container mx-auto">
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+    <section className="py-24 px-4 relative overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
+      
+      <div className="container mx-auto relative z-10">
+        <div className="text-center mb-20 max-w-3xl mx-auto">
+          <h2 className="text-4xl md:text-6xl font-bold mb-6">
             Tudo que você precisa em{" "}
-            <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent animate-pulse">
               um só lugar
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground leading-relaxed">
             Sistema completo de gestão desenvolvido especialmente para lava-rápidos profissionais
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => {
             const Icon = feature.icon;
+            const hasImage = !!feature.image;
+            
             return (
-              <Card
+              <div
                 key={index}
-                className="group hover:shadow-[var(--shadow-medium)] transition-all duration-300 hover:-translate-y-1 border-border/50 overflow-hidden"
+                className="group relative"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <CardContent className="p-6">
-                  {feature.image && (
-                    <div className="mb-4 rounded-lg overflow-hidden bg-secondary/50">
+                {/* Glow effect on hover */}
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+                
+                <Card className="relative h-full border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                  {hasImage && (
+                    <div className="relative h-56 overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent z-10" />
                       <img
                         src={feature.image}
                         alt={feature.title}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       />
+                      <div className="absolute top-4 left-4 z-20 w-14 h-14 rounded-xl bg-background/80 backdrop-blur-md border border-border/50 flex items-center justify-center group-hover:scale-110 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
+                        <Icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                      </div>
                     </div>
                   )}
-                  <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                      <Icon className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                      <p className="text-muted-foreground">{feature.description}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  
+                  <CardContent className={hasImage ? "p-6" : "p-8"}>
+                    {!hasImage && (
+                      <div className="mb-5 w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:from-primary group-hover:to-accent transition-all duration-500 group-hover:scale-110">
+                        <Icon className="w-8 h-8 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
+                      </div>
+                    )}
+                    
+                    <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
+                      {feature.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      {feature.description}
+                    </p>
+                    
+                    {/* Decorative element */}
+                    <div className="mt-4 h-1 w-0 bg-gradient-to-r from-primary to-accent group-hover:w-full transition-all duration-500 rounded-full" />
+                  </CardContent>
+                </Card>
+              </div>
             );
           })}
         </div>
