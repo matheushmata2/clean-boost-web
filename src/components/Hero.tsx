@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles } from "lucide-react";
 import heroImage from "@/assets/hero-car-wash.jpg";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -39,10 +40,12 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 animate-in fade-in slide-in-from-bottom-10 duration-700 delay-300">
-            <Button size="xl" variant="hero" className="group">
-              Começar agora
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            <Link to="/cadastro">
+              <Button size="xl" variant="hero" className="group">
+                Começar agora
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
             <Button size="xl" variant="heroOutline">
               Conhecer recursos
             </Button>
