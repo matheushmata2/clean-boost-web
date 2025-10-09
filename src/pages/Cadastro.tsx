@@ -9,8 +9,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { toast } from "sonner";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const cadastroSchema = z.object({
   nome_empresa: z.string().trim().min(1, "Nome da empresa é obrigatório").max(100),
@@ -30,6 +31,8 @@ const cadastroSchema = z.object({
 type CadastroForm = z.infer<typeof cadastroSchema>;
 
 const Cadastro = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const form = useForm<CadastroForm>({
     resolver: zodResolver(cadastroSchema),
     defaultValues: {
@@ -46,15 +49,36 @@ const Cadastro = () => {
     },
   });
 
-  const onSubmit = (data: CadastroForm) => {
+  const onSubmit = async (data: CadastroForm) => {
+    setIsLoading(true);
+    
     const payload = {
       ...data,
       valor_da_renda: Number(data.valor_da_renda),
       visualizacao_fila: "/dashboard/operacao",
     };
     
-    console.log("Dados do cadastro:", payload);
-    toast.success("Cadastro realizado com sucesso!");
+    try {
+      const response = await fetch("http://apptnote.eastus.cloudapp.azure.com:3335/empresa", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao realizar cadastro");
+      }
+
+      toast.success("Cadastro realizado com sucesso!");
+      form.reset();
+    } catch (error) {
+      toast.error("Erro ao realizar cadastro. Tente novamente.");
+      console.error("Erro:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -289,8 +313,16 @@ const Cadastro = () => {
                   type="submit" 
                   size="lg" 
                   className="w-full mt-8"
+                  disabled={isLoading}
                 >
-                  Criar conta grátis
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Cadastrando...
+                    </>
+                  ) : (
+                    "Criar conta grátis"
+                  )}
                 </Button>
               </form>
             </Form>
