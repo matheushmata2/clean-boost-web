@@ -1,27 +1,21 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Bell, BarChart3, Users, Calendar, FileText, Shield } from "lucide-react";
-import featureCrm from "@/assets/feature-crm.jpg";
-import featureAlerts from "@/assets/feature-alerts.jpg";
-import featureAnalytics from "@/assets/feature-analytics.jpg";
 
 const features = [
   {
     icon: Users,
     title: "Gestão Completa de Clientes",
     description: "Cadastro detalhado de clientes e veículos. Histórico completo de serviços e preferências.",
-    image: featureCrm,
   },
   {
     icon: Bell,
     title: "Alertas Inteligentes",
     description: "Sistema de notificações automáticas para retorno de clientes e manutenções preventivas.",
-    image: featureAlerts,
   },
   {
     icon: BarChart3,
     title: "Relatórios e Análises",
     description: "Dashboards completos com métricas de performance, faturamento e produtividade.",
-    image: featureAnalytics,
   },
   {
     icon: Calendar,
@@ -62,7 +56,6 @@ const Features = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {features.map((feature, index) => {
             const Icon = feature.icon;
-            const hasImage = !!feature.image;
             
             return (
               <div
@@ -73,27 +66,11 @@ const Features = () => {
                 {/* Glow effect on hover */}
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-primary to-accent rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
                 
-                <Card className="relative h-full border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                  {hasImage && (
-                    <div className="relative h-56 overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent z-10" />
-                      <img
-                        src={feature.image}
-                        alt={feature.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className="absolute top-4 left-4 z-20 w-14 h-14 rounded-xl bg-background/80 backdrop-blur-md border border-border/50 flex items-center justify-center group-hover:scale-110 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
-                        <Icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
-                      </div>
+                <Card className="relative h-full border-border/50 bg-card/50 backdrop-blur-sm hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2">
+                  <CardContent className="p-8">
+                    <div className="mb-5 w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:from-primary group-hover:to-accent transition-all duration-500 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-primary/50">
+                      <Icon className="w-8 h-8 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
                     </div>
-                  )}
-                  
-                  <CardContent className={hasImage ? "p-6" : "p-8"}>
-                    {!hasImage && (
-                      <div className="mb-5 w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:from-primary group-hover:to-accent transition-all duration-500 group-hover:scale-110">
-                        <Icon className="w-8 h-8 text-primary group-hover:text-primary-foreground transition-colors duration-300" />
-                      </div>
-                    )}
                     
                     <h3 className="text-2xl font-bold mb-3 group-hover:text-primary transition-colors duration-300">
                       {feature.title}
