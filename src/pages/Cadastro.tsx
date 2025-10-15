@@ -55,7 +55,7 @@ const Cadastro = () => {
     const payload = {
       ...data,
       valor_da_renda: Number(data.valor_da_renda),
-      visualizacao_fila: "/dashboard/operacao",
+      visualizacao_fila: "Etapa",
     };
     
     try {
