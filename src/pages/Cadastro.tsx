@@ -59,7 +59,7 @@ const Cadastro = () => {
     };
     
     try {
-      const response = await fetch("http://apptnote.eastus.cloudapp.azure.com:3335/empresa", {
+      const response = await fetch("https://api.clicklava.com.br/empresa", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
